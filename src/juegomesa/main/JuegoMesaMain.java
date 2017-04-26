@@ -19,6 +19,7 @@ public class JuegoMesaMain {
         System.out.println("Hola Mundo2!");
         System.out.println("Segundo commit Jorge");
         System.out.println("Tercer commit Maria");
+        System.out.println("stash");
     }
     
 }
