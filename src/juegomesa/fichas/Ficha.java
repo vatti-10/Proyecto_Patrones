@@ -2,6 +2,7 @@
 package juegomesa.fichas;
 
 import juegomesa.emuns.EColorJugador;
+import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
 import juegomesa.utils.FabricaConvertidoresInputCoordenada;
 
@@ -9,19 +10,19 @@ import juegomesa.utils.FabricaConvertidoresInputCoordenada;
 public abstract class Ficha {
     protected int coordenadaX;
     protected int coordenadaY;
-    protected String tipo;
+    protected ETipoFicha tipoFicha;
     protected EColorJugador color;
     protected ETipoJuego tipoJuego;
     
-    public Ficha(int pCoordX, int pCoordY, String pTipo, EColorJugador pColor, ETipoJuego pTipoJuego){
+    public Ficha(int pCoordX, int pCoordY, ETipoFicha pTipo, EColorJugador pColor){
         setCoordenadaX(pCoordX);
         setCoordenadaY(pCoordY);
         setColor(pColor);
-        setTipo(pTipo);
+        setTipoFicha(pTipo);
     }
     
     public final boolean moverFicha(String pInput){
-        int[] coordenadas = convertirInputACoordenadas(pInput, tipoJuego);
+        int[] coordenadas = convertirInputACoordenadas(pInput);
         if(verificarMovimientoValido(coordenadas)){
             actualizarCoordenadas(coordenadas);
             return true;
@@ -29,8 +30,8 @@ public abstract class Ficha {
         return false;
     }
     
-    protected int[] convertirInputACoordenadas(String pInput, ETipoJuego pTipoInput){
-        return FabricaConvertidoresInputCoordenada.fabricarConvertidor(pTipoInput).convertir(pInput);
+    protected int[] convertirInputACoordenadas(String pInput){
+        return FabricaConvertidoresInputCoordenada.fabricarConvertidor(tipoJuego).convertir(pInput);
     }
     
     public abstract boolean verificarMovimientoValido(int[] pCoordenadas);
@@ -70,17 +71,17 @@ public abstract class Ficha {
     }
 
     /**
-     * @return the tipo
+     * @return the tipoFicha
      */
-    public String getTipo() {
-        return tipo;
+    public ETipoFicha getTipoFicha() {
+        return tipoFicha;
     }
 
     /**
-     * @param tipo the tipo to set
+     * @param tipoFicha the tipoFicha to set
      */
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setTipoFicha(ETipoFicha tipoFicha) {
+        this.tipoFicha = tipoFicha;
     }
 
     /**
@@ -95,6 +96,20 @@ public abstract class Ficha {
      */
     public void setColor(EColorJugador color) {
         this.color = color;
+    }
+
+    /**
+     * @return the tipoJuego
+     */
+    public ETipoJuego getTipoJuego() {
+        return tipoJuego;
+    }
+
+    /**
+     * @param tipoJuego the tipoJuego to set
+     */
+    public void setTipoJuego(ETipoJuego tipoJuego) {
+        this.tipoJuego = tipoJuego;
     }
 }
 
