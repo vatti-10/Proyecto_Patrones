@@ -29,9 +29,10 @@ public abstract class Tablero {
     public Casilla[][] getCasillasTablero(){
         return casillasTablero;
     }
-    public int[] getCoordenadasNumericas(String pCoordenadas){
-        ConvertidorInputsDamas convertidorInputsDamas = new ConvertidorInputsDamas();
-        return convertidorInputsDamas.convertir(pCoordenadas);
+    public abstract int[] getCoordenadasNumericas(String pCoordenadas);
+
+    public boolean estaCasillaVacia(int pCoordenadaX,int pCoordenadaY){
+        return getCasillasTablero()[pCoordenadaY][pCoordenadaX].casillaVacia();
     }
     public Ficha getFicha(int pCoordenadaX,int pCoordenadaY){
         return getCasillasTablero()[pCoordenadaY][pCoordenadaX].getFicha();

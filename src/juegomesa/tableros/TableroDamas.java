@@ -8,6 +8,7 @@ package juegomesa.tableros;
 import juegomesa.emuns.EColorJugador;
 import juegomesa.emuns.ETipoFicha;
 import juegomesa.fichas.Ficha;
+import juegomesa.utils.convertidores.ConvertidorInputsDamas;
 
 /**
  *
@@ -25,7 +26,7 @@ public class TableroDamas extends Tablero{
     @Override
     public void actualizarTablero(String pCoordenadas) {
         int [] coordenadas=getCoordenadasNumericas(pCoordenadas);
-        if(hayFicha(coordenadas[0],coordenadas[1])){
+        if(!estaCasillaVacia(coordenadas[0],coordenadas[1])){
             realizarJugada(coordenadas,pCoordenadas);
         }
     }
@@ -46,13 +47,13 @@ public class TableroDamas extends Tablero{
         boolean haySalto=false,resul=false;
         do{
             if(coordenadas[0]<8 &&coordenadas[0]>1 && coordenadas[1]>1){
-                if(hayFicha(coordenadas[0]+1, coordenadas[1]-1) && !hayFicha(coordenadas[0]+2, coordenadas[1]-2)){
+                if(!estaCasillaVacia(coordenadas[0]+1, coordenadas[1]-1) && estaCasillaVacia(coordenadas[0]+2, coordenadas[1]-2)){
                     comerFicha(getFicha(coordenadas[0], coordenadas[1]),getFicha(coordenadas[0]+1, coordenadas[1]-1),coordenadas[1]-2, coordenadas[0]+2);
                     coordenadas[0]=coordenadas[0]+2;
                     coordenadas[1]=coordenadas[1]-2;
                     haySalto=true;
                     resul=true;
-                }else if(hayFicha(coordenadas[0]-1, coordenadas[1]-1) && !hayFicha(coordenadas[0]-2, coordenadas[1]-2)){
+                }else if(!estaCasillaVacia(coordenadas[0]-1, coordenadas[1]-1) && estaCasillaVacia(coordenadas[0]-2, coordenadas[1]-2)){
                     comerFicha(getFicha(coordenadas[0], coordenadas[1]),getFicha(coordenadas[0]-1, coordenadas[1]-1),coordenadas[0]-2, coordenadas[1]-2);
                     coordenadas[0]=coordenadas[0]-2;
                     coordenadas[1]=coordenadas[1]-2;
@@ -69,13 +70,13 @@ public class TableroDamas extends Tablero{
         boolean haySalto=false,resul=false;
         do{
             if(coordenadas[0]<8 &&coordenadas[0]>1 && coordenadas[1]>1){
-                if(hayFicha(coordenadas[0]+1, coordenadas[1]+1) && !hayFicha(coordenadas[0]+2, coordenadas[1]+2)){
+                if(!estaCasillaVacia(coordenadas[0]+1, coordenadas[1]+1) && estaCasillaVacia(coordenadas[0]+2, coordenadas[1]+2)){
                     comerFicha(getFicha(coordenadas[0], coordenadas[1]),getFicha(coordenadas[0]+1, coordenadas[1]+1),coordenadas[1]+2, coordenadas[0]+2);
                     coordenadas[0]=coordenadas[0]+2;
                     coordenadas[1]=coordenadas[1]+2;
                     haySalto=true;
                     resul=true;
-                }else if(hayFicha(coordenadas[0]-1, coordenadas[1]+1) && !hayFicha(coordenadas[0]-2, coordenadas[1]+2)){
+                }else if(!estaCasillaVacia(coordenadas[0]-1, coordenadas[1]+1) && estaCasillaVacia(coordenadas[0]-2, coordenadas[1]+2)){
                     comerFicha(getFicha(coordenadas[0], coordenadas[1]),getFicha(coordenadas[0]-1, coordenadas[1]+1),coordenadas[0]-2, coordenadas[1]+2);
                     coordenadas[0]=coordenadas[0]-2;
                     coordenadas[1]=coordenadas[1]+2;
@@ -98,17 +99,19 @@ public class TableroDamas extends Tablero{
     }
     
     private void moverFicha(int[] coordenadas,String pCoordenadas) {
-        if(!hayFicha(coordenadas[2], coordenadas[3])){
+        if(estaCasillaVacia(coordenadas[2], coordenadas[3])){
             getFicha(coordenadas[0], coordenadas[1]).moverFicha(pCoordenadas);
         }
     }
     
-    public boolean hayFicha(int pCoordenadaX,int pCoordenadaY){
-        return getFicha(pCoordenadaX, pCoordenadaY)!=null;
-    }
     @Override
     public boolean verificarCoordenadas(String pCoordenadas) {
        return validarCoordenadas(getCoordenadasNumericas(pCoordenadas));
+    }
+    @Override
+    public int[] getCoordenadasNumericas(String pCoordenadas){
+        ConvertidorInputsDamas convertidorInputsDamas = new ConvertidorInputsDamas();
+        return convertidorInputsDamas.convertir(pCoordenadas);
     }
     private void ubicarFichas(){
         ubicarFichasBlancas();
