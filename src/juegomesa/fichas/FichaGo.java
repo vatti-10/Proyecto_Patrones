@@ -8,6 +8,7 @@ package juegomesa.fichas;
 import juegomesa.emuns.EColorJugador;
 import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
+import juegomesa.utils.FabricaConvertidoresInputCoordenada;
 
 /**
  *
@@ -16,13 +17,14 @@ import juegomesa.emuns.ETipoJuego;
 public class FichaGo extends Ficha{
 
     public FichaGo(int[] pCoordenadas, EColorJugador pColor) {
-        super(pCoordenadas[0], pCoordenadas[1], ETipoFicha.GO, pColor);
+        super(pCoordenadas[0], pCoordenadas[1], ETipoFicha.FICHA_GO, pColor);
         setTipoJuego(ETipoJuego.GO);        
+    }    
+    
+    public FichaGo(String pInput, EColorJugador pColor) {
+        super(FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.GO).convertir(pInput)[0], FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.GO).convertir(pInput)[1], ETipoFicha.FICHA_GO, pColor);
+        setTipoJuego(ETipoJuego.GO);
     }
-    
-    
-    
-    
 
     @Override
     public boolean verificarMovimientoValido(int[] pCoordenadas) {
