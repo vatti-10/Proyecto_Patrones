@@ -15,7 +15,7 @@ public class ConvertidorInputsGo implements IConvertidorInput{
     public int[] convertir(String pInput) {
         String valor = pInput.substring(2, pInput.length()-1);
         int coordX = Character.getNumericValue(valor.charAt(0))-10;
-        int coorY = Character.getNumericValue(valor.charAt(1))-10;
+        int coorY = (Character.getNumericValue(valor.charAt(1))-29)*-1;
         int[] coordenada = {coordX,coorY};
         return coordenada;
     }
