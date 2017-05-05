@@ -15,13 +15,19 @@ import juegomesa.emuns.ETipoJuego;
  */
 public class FichaAjedrezTorre extends Ficha{
     
-    public FichaAjedrezTorre(int[] pCoordenadas, EColorJugador pColor) {
-        super(pCoordenadas[0], pCoordenadas[1], ETipoFicha.TORRE, pColor);
+    public FichaAjedrezTorre(int pCoordX, int pCoordY, EColorJugador pColor) {
+        super(pCoordX, pCoordY, ETipoFicha.TORRE, pColor);
     }
 
     @Override
     public boolean verificarMovimientoValido(int[] pCoordenadas) {
-        
+        if(pCoordenadas[0] == coordenadaX && pCoordenadas[1] != coordenadaY){
+            return true;
+        }
+        if(pCoordenadas[0] != coordenadaX && pCoordenadas[1] == coordenadaY){
+            return true;
+        }
+        return false;
     }
     
 }
