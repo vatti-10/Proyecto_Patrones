@@ -14,7 +14,7 @@ public class ConvertidorInputsAjedrez implements IConvertidorInput{
     @Override
     public int[] convertir(String pInput) {
         int coordX = Character.getNumericValue(pInput.charAt(pInput.length()-2))-10;
-        int coorY = Character.getNumericValue(pInput.charAt(pInput.length()-1))-1;
+        int coorY = 8 - Character.getNumericValue(pInput.charAt(pInput.length()-1));
         int[] coordenada = {coordX,coorY};
         return coordenada;
     }
