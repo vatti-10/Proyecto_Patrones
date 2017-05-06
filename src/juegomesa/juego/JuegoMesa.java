@@ -15,13 +15,13 @@ import juegomesa.utils.FabricaTablero;
  * @author hmari_001
  */
 public abstract class JuegoMesa {
-    private Jugador jugador1;
-    private Jugador jugador2;
-    private Tablero tablero;
-    private ETipoJuego tipoJuego;
-    private Jugador jugadorActual;
-    private int contadorTurnos;
-    private StringBuilder registrosJugadas;
+    protected Jugador jugador1;
+    protected Jugador jugador2;
+    protected Tablero tablero;
+    protected ETipoJuego tipoJuego;
+    protected Jugador jugadorActual;
+    protected int contadorTurnos;
+    protected StringBuilder registrosJugadas;
     
     public JuegoMesa(Jugador pjugador1, Jugador pjugador2, ETipoJuego ptipoJuego){
         setJugador1(pjugador1);
