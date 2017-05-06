@@ -5,6 +5,7 @@
  */
 package juegomesa.tableros;
 
+import juegomesa.emuns.EColorJugador;
 import juegomesa.fichas.Ficha;
 import juegomesa.utils.convertidores.ConvertidorInputsDamas;
 
@@ -37,7 +38,7 @@ public abstract class Tablero {
     public Ficha getFicha(int pCoordenadaX,int pCoordenadaY){
         return getCasillasTablero()[pCoordenadaY][pCoordenadaX].getFicha();
     }
-    public abstract void actualizarTablero(String pCoordenadas);
+    public abstract boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador);
     
     public abstract boolean verificarCoordenadas(String pCoordenadas);
     
