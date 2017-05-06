@@ -10,7 +10,7 @@ package juegomesa.emuns;
  * @author jmda9
  */
 public enum ETipoFicha {
-    GO,
+    FICHA_GO,
     DAMAS_NORMAL,
     DAMAS_CORONA,
     PEON,

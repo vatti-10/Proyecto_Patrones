@@ -12,7 +12,6 @@ public abstract class Ficha {
     protected int coordenadaY;
     protected ETipoFicha tipoFicha;
     protected EColorJugador color;
-    protected ETipoJuego tipoJuego;
     
     public Ficha(int pCoordX, int pCoordY, ETipoFicha pTipo, EColorJugador pColor){
         setCoordenadaX(pCoordX);
@@ -21,17 +20,12 @@ public abstract class Ficha {
         setTipoFicha(pTipo);
     }
     
-    public final boolean moverFicha(String pInput){
-        int[] coordenadas = convertirInputACoordenadas(pInput);
-        if(verificarMovimientoValido(coordenadas)){
-            actualizarCoordenadas(coordenadas);
+    public final boolean moverFicha(int[] pCoordenadas){
+        if(verificarMovimientoValido(pCoordenadas)){
+            actualizarCoordenadas(pCoordenadas);
             return true;
         }
         return false;
-    }
-    
-    protected int[] convertirInputACoordenadas(String pInput){
-        return FabricaConvertidoresInputCoordenada.fabricarConvertidor(tipoJuego).convertir(pInput);
     }
     
     public abstract boolean verificarMovimientoValido(int[] pCoordenadas);
@@ -96,20 +90,6 @@ public abstract class Ficha {
      */
     public void setColor(EColorJugador color) {
         this.color = color;
-    }
-
-    /**
-     * @return the tipoJuego
-     */
-    public ETipoJuego getTipoJuego() {
-        return tipoJuego;
-    }
-
-    /**
-     * @param tipoJuego the tipoJuego to set
-     */
-    public void setTipoJuego(ETipoJuego tipoJuego) {
-        this.tipoJuego = tipoJuego;
     }
 }
 
