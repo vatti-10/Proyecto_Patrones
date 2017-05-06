@@ -28,7 +28,7 @@ public abstract class JuegoMesa {
         setJugador2(pjugador2);
         setTipoJuego(ptipoJuego);
         setJugadorActual(null);
-        setContadorTurnos(0);
+        setContadorTurnos(1);
         setRegistrosJugadas(null);
         iniciarJuego(ptipoJuego);
     }
@@ -105,8 +105,8 @@ public abstract class JuegoMesa {
     
     public final boolean jugarTurno(String pjugada){
         if(realizarJugada(pjugada)){
-            pasarTurno();
             almacenarJugada(pjugada);
+            pasarTurno();
             return true;
         }else{
             return false;
