@@ -20,7 +20,15 @@ public class FichaAjedrezCaballo extends Ficha{
 
     @Override
     public boolean verificarMovimientoValido(int[] pCoordenadas) {
-        
+        if(pCoordenadas[0] == (coordenadaX+2) && pCoordenadas[1] == (coordenadaY+1)) return true;
+        if(pCoordenadas[0] == (coordenadaX+2) && pCoordenadas[1] == (coordenadaY-1)) return true;
+        if(pCoordenadas[0] == (coordenadaX-2) && pCoordenadas[1] == (coordenadaY+1)) return true;
+        if(pCoordenadas[0] == (coordenadaX-2) && pCoordenadas[1] == (coordenadaY-1)) return true;
+        if(pCoordenadas[0] == (coordenadaX+1) && pCoordenadas[1] == (coordenadaY+2)) return true;
+        if(pCoordenadas[0] == (coordenadaX+1) && pCoordenadas[1] == (coordenadaY-2)) return true;
+        if(pCoordenadas[0] == (coordenadaX-1) && pCoordenadas[1] == (coordenadaY+2)) return true;
+        if(pCoordenadas[0] == (coordenadaX-1) && pCoordenadas[1] == (coordenadaY-2)) return true;
+        return false;        
     }
     
 }
