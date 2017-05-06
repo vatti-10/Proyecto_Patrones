@@ -11,14 +11,12 @@ public class Jugador {
     private String  username;
     private String correo;
     private String password;
-    private String colorJugador;
     private EColorJugador EcolorJugador;
     
-    public Jugador(String pusername, String pcorreo, String ppassword, String pcolorJugador, EColorJugador pEColorJugador){
+    public Jugador(String pusername, String pcorreo, String ppassword, EColorJugador pEColorJugador){
         setUsername(pusername);
         setCorreo(pcorreo);
         setPassword(ppassword);
-        setColorJugador(pcolorJugador);
         setEColorJugador(pEColorJugador);
     }
     
@@ -46,13 +44,6 @@ public class Jugador {
         password = ppassword;
     }
     
-    public String getColorJugador(){
-        return colorJugador;
-    }
-    
-    public void setColorJugador(String pcolorJugador){
-        colorJugador = pcolorJugador;
-    }
     
     public EColorJugador getEColorJugador(){
         return EcolorJugador;

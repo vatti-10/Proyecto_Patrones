@@ -7,7 +7,7 @@ package juegomesa.utils;
 
 import juegomesa.emuns.ETipoJuego;
 import juegomesa.juego.JuegoMesa;
-import juegomesa.utils.tipojuego.ITipoJuego;
+
 
 /**
  *
