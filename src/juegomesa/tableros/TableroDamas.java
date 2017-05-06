@@ -15,7 +15,9 @@ import juegomesa.utils.convertidores.ConvertidorInputsDamas;
  * @author carlo
  */
 public class TableroDamas extends Tablero{
-
+    public TableroDamas(){
+        super();
+    }
     @Override
     public void construirCasillasTablero() {
         casillasTablero=new Casilla[10][10];
@@ -24,16 +26,24 @@ public class TableroDamas extends Tablero{
     }
 
     @Override
-    public void actualizarTablero(String pCoordenadas) {
+    public boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador) {
         int [] coordenadas=getCoordenadasNumericas(pCoordenadas);
-        if(!estaCasillaVacia(coordenadas[0],coordenadas[1])){
-            realizarJugada(coordenadas,pCoordenadas);
-        }
+        if(verificarCoordenadas(pCoordenadas)&&!estaCasillaVacia(coordenadas[0],coordenadas[1])){
+
+          return realizarJugada(coordenadas,pCoordenadas);
+
+        }else
+            return false;
     }
-     private void realizarJugada(int[] coordenadas,String pCoordenadas) {
+     private boolean realizarJugada(int[] coordenadas,String pCoordenadas) {
+       boolean resul=false;
+
        if(!verificarSalto(coordenadas)){
-           moverFicha(coordenadas,pCoordenadas);
+           if(moverFicha(coordenadas,pCoordenadas)){
+               resul=true;
+           }
        }
+       return resul;
     }
      private boolean verificarSalto(int[] coordenadas) {
         if(getFicha(coordenadas[0], coordenadas[1]).getColor()==EColorJugador.NEGRO){
@@ -89,7 +99,7 @@ public class TableroDamas extends Tablero{
         }while(haySalto);
         return resul;
     }
-    
+
     private void comerFicha(Ficha pFichaAMover,Ficha pFichaAComer, int coordenadaYNueva, int coordenadaXNueva) {
         getCasillasTablero()[coordenadaYNueva][coordenadaXNueva].setFicha(getFicha(pFichaAMover.getCoordenadaX(), pFichaAMover.getCoordenadaY()));
         getCasillasTablero()[pFichaAMover.getCoordenadaY()][pFichaAMover.getCoordenadaX()].setFicha(null);
@@ -97,11 +107,14 @@ public class TableroDamas extends Tablero{
         getCasillasTablero()[coordenadaYNueva][coordenadaXNueva].getFicha().setCoordenadaY(coordenadaYNueva);
         getCasillasTablero()[coordenadaYNueva][coordenadaXNueva].getFicha().setCoordenadaX(coordenadaXNueva);
     }
-    
-    private void moverFicha(int[] coordenadas,String pCoordenadas) {
+
+    private boolean moverFicha(int[] coordenadas,String pCoordenadas) {
+        boolean resul=false;
         if(estaCasillaVacia(coordenadas[2], coordenadas[3])){
-            getFicha(coordenadas[0], coordenadas[1]).moverFicha(pCoordenadas);
+            if(getFicha(coordenadas[0], coordenadas[1]).moverFicha(pCoordenadas))
+                resul=true;
         }
+        return resul;
     }
     
     @Override
@@ -119,7 +132,7 @@ public class TableroDamas extends Tablero{
     }
 
     private void ubicarFichasBlancas() {
-        int ubicacionFichaInicio=1;
+        int ubicacionFichaInicio=0;
         for (int i = 0; i < 4; i++) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
                 getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
@@ -131,7 +144,7 @@ public class TableroDamas extends Tablero{
 
     private void ubicarFichasNegras() {
         int ubicacionFichaInicio=1;
-        for (int i = 9; i < 5; i--) {
+        for (int i = 9; i > 6; i--) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
                 getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
             }

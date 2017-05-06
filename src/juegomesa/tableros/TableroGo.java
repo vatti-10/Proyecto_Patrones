@@ -16,7 +16,10 @@ import juegomesa.utils.FabricaConvertidoresInputCoordenada;
  * @author carlos
  */
 public class TableroGo extends Tablero{
-
+    public TableroGo(){
+        super();
+    }
+    
     @Override
     public void construirCasillasTablero() {
         casillasTablero=new Casilla[19][19];
@@ -24,12 +27,15 @@ public class TableroGo extends Tablero{
     }
 
     @Override
-    public void actualizarTablero(String pCoordenadas) {
+    public boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador) {
+        boolean resul=false;
         int [] coordenadas=getCoordenadasNumericas(pCoordenadas);
         if(estaCasillaVacia(coordenadas[0],coordenadas[1])){
             ubicarFicha(coordenadas,pCoordenadas.charAt(0));
             observarAlrededorDeFicha(coordenadas);
+            resul=true;
         }
+        return resul;
     }
     
     private void ubicarFicha(int[] coordenadas,char pJugador) {
@@ -47,7 +53,11 @@ public class TableroGo extends Tablero{
         }
         return false;
     }
-
+    @Override
+    public boolean validarCoordenadas(int[] pCoordenadas){
+        return pCoordenadas[0]<getCasillasTablero()[0].length
+                && pCoordenadas[1]<getCasillasTablero().length;
+    }
     @Override
     public int[] getCoordenadasNumericas(String pCoordenadas) {
         
@@ -55,56 +65,57 @@ public class TableroGo extends Tablero{
     }
 
     private void observarAlrededorDeFicha(int[] coordenadas) {
+        EColorJugador colorFicha=getCasillasTablero()[coordenadas[1]][coordenadas[0]].getFicha().getColor();
+        EColorJugador colorFichaEnemiga;
+        if(colorFicha==EColorJugador.BLANCO)colorFichaEnemiga=EColorJugador.NEGRO;
+        else colorFichaEnemiga=EColorJugador.BLANCO;
+        
         if(coordenadas[0]>0 && coordenadas[0]<18 && coordenadas[1]>0 && coordenadas[1]<18){
-            if(fichaEsUnidad(coordenadas)){
-                verificarUnidadRodeada(coordenadas);
-            }else{
-                verificarFichaRodeada(coordenadas);
+            if(fichaTocaAFichaEnemiga(coordenadas,colorFichaEnemiga)){
+                int[] coordenadasFichaEnemiga=getCoordenadasFichaEnemiga(coordenadas,colorFichaEnemiga);
+                verificarFichaEnemigaRodeada(coordenadasFichaEnemiga,colorFicha);
             }
         }
     }
-
-    private boolean fichaEsUnidad(int[] coordenadas) {
-        EColorJugador colorFicha=getCasillasTablero()[coordenadas[1]][coordenadas[0]].getFicha().getColor();
-        return fichaChocaAOtra(coordenadas[0],coordenadas[1]-1,colorFicha)||fichaChocaAOtra(coordenadas[0],coordenadas[1]+1,colorFicha)||
-                fichaChocaAOtra(coordenadas[0]-1,coordenadas[1],colorFicha)||fichaChocaAOtra(coordenadas[0]+1,coordenadas[1],colorFicha);
+    private boolean fichaTocaAFichaEnemiga(int [] coordenadas,EColorJugador pColorFicha){
+        return fichaChocaAOtra(coordenadas[0],coordenadas[1]-1,pColorFicha)||fichaChocaAOtra(coordenadas[0],coordenadas[1]+1,pColorFicha)||
+                fichaChocaAOtra(coordenadas[0]-1,coordenadas[1],pColorFicha)||fichaChocaAOtra(coordenadas[0]+1,coordenadas[1],pColorFicha);
+    }
+    private int [] getCoordenadasFichaEnemiga(int [] pCoordenadas,EColorJugador pColorFicha){
+        int[] coordenadas=new int[2];
+        if(fichaChocaAOtra(pCoordenadas[0],pCoordenadas[1]-1, pColorFicha)){
+            coordenadas[0]=pCoordenadas[0];
+            coordenadas[1]=pCoordenadas[1]-1;
+        }
+        if(fichaChocaAOtra(pCoordenadas[0],pCoordenadas[1]+1, pColorFicha)){
+            coordenadas[0]=pCoordenadas[0];
+            coordenadas[1]=pCoordenadas[1]+1;
+        }
+        if(fichaChocaAOtra(pCoordenadas[0]-1,pCoordenadas[1], pColorFicha)){
+            coordenadas[0]=pCoordenadas[0]-1;
+            coordenadas[1]=pCoordenadas[1];
+        }
+        if(fichaChocaAOtra(pCoordenadas[0]+1,pCoordenadas[1], pColorFicha)){
+            coordenadas[0]=pCoordenadas[0]+1;
+            coordenadas[1]=pCoordenadas[1];
+        }
+        return coordenadas;
     }
 
     private boolean fichaChocaAOtra(int pCoordenadasX,int pCoordenadaY,EColorJugador pcolor) {
         return !getCasillasTablero()[pCoordenadaY][pCoordenadasX].casillaVacia() && getFicha(pCoordenadasX,pCoordenadaY).getColor()==pcolor;
     }
 
-    private void verificarFichaRodeada(int[] coordenadas) {
-        EColorJugador colorFicha=getCasillasTablero()[coordenadas[1]][coordenadas[0]].getFicha().getColor();
-        if(colorFicha==EColorJugador.BLANCO)colorFicha=EColorJugador.NEGRO;
-        else colorFicha=EColorJugador.BLANCO;
-        
-        comerFicha(coordenadas,colorFicha);
-    }
 
-    private void comerFicha(int[] coordenadas, EColorJugador colorFicha) {
-        if(fichaChocaAOtra(coordenadas[0],coordenadas[1]-1, colorFicha)){
-            fichaRodeada(coordenadas[0],coordenadas[1]-1,getFicha(coordenadas[0],coordenadas[1]).getColor());
-        }
-        if(fichaChocaAOtra(coordenadas[0],coordenadas[1]+1, colorFicha)){
-            fichaRodeada(coordenadas[0],coordenadas[1]-1,getFicha(coordenadas[0],coordenadas[1]).getColor());
-        }
-        if(fichaChocaAOtra(coordenadas[0]-1,coordenadas[1], colorFicha)){
-            fichaRodeada(coordenadas[0],coordenadas[1]-1,getFicha(coordenadas[0],coordenadas[1]).getColor());
-        }
-        if(fichaChocaAOtra(coordenadas[0]+1,coordenadas[1], colorFicha)){
-            fichaRodeada(coordenadas[0],coordenadas[1]-1,getFicha(coordenadas[0],coordenadas[1]).getColor());
-        }
+    private boolean fichaRodeada(int coordenadaX, int coordenadaY, EColorJugador color) {
+       return fichaChocaAOtra(coordenadaX+1,coordenadaY,color)&&fichaChocaAOtra(coordenadaX,coordenadaY-1,color)&&fichaChocaAOtra(coordenadaX,coordenadaY+1,color)&&
+               fichaChocaAOtra(coordenadaX-1,coordenadaY,color);
     }
-
-    private void fichaRodeada(int coordenadaX, int coordenadaY, EColorJugador color) {
-       if (fichaChocaAOtra(coordenadaX+1,coordenadaY,color)&&fichaChocaAOtra(coordenadaX,coordenadaY-1,color)&&fichaChocaAOtra(coordenadaX,coordenadaY+1,color)&&
-               fichaChocaAOtra(coordenadaX-1,coordenadaY,color))
-           getCasillasTablero()[coordenadaY][coordenadaX].setFicha(null);
-    }
-
-    private void verificarUnidadRodeada(int[] coordenadas) {
-        
+    
+    private void verificarFichaEnemigaRodeada(int[] coordenadas, EColorJugador pColorFicha) {
+        if(fichaRodeada(coordenadas[0],coordenadas[1],pColorFicha)){
+            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(null);
+        }
     }
 
 }
