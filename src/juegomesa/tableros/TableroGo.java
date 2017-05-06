@@ -6,9 +6,8 @@
 package juegomesa.tableros;
 
 import juegomesa.emuns.EColorJugador;
-import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
-import juegomesa.fichas.Ficha;
+import juegomesa.fichas.FichaGo;
 import juegomesa.utils.FabricaConvertidoresInputCoordenada;
 
 /**
@@ -21,7 +20,7 @@ public class TableroGo extends Tablero{
     }
     
     @Override
-    public void construirCasillasTablero() {
+    protected void construirCasillasTablero() {
         casillasTablero=new Casilla[19][19];
         rellarTableroConCasillas();
     }
@@ -40,26 +39,26 @@ public class TableroGo extends Tablero{
     
     private void ubicarFicha(int[] coordenadas,char pJugador) {
         if(pJugador=='B'){
-            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new Ficha(coordenadas[0], coordenadas[1], ETipoFicha.GO, EColorJugador.BLANCO));
+            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new FichaGo(coordenadas, EColorJugador.BLANCO));
         }else{
-            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new Ficha(coordenadas[0], coordenadas[1], ETipoFicha.GO, EColorJugador.NEGRO));
+            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new FichaGo(coordenadas, EColorJugador.NEGRO));
         }
     }
     
     @Override
-    public boolean verificarCoordenadas(String pCoordenadas) {
+    protected boolean verificarCoordenadas(String pCoordenadas) {
         if(pCoordenadas.length()==5){
             return validarCoordenadas(getCoordenadasNumericas(pCoordenadas));
         }
         return false;
     }
     @Override
-    public boolean validarCoordenadas(int[] pCoordenadas){
+    protected boolean validarCoordenadas(int[] pCoordenadas){
         return pCoordenadas[0]<getCasillasTablero()[0].length
                 && pCoordenadas[1]<getCasillasTablero().length;
     }
     @Override
-    public int[] getCoordenadasNumericas(String pCoordenadas) {
+    protected int[] getCoordenadasNumericas(String pCoordenadas) {
         
         return FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.GO).convertir(pCoordenadas);
     }

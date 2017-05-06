@@ -22,14 +22,14 @@ public class TableroAjedrez extends Tablero{
     }
     
     @Override
-    public void construirCasillasTablero() {
+    protected void construirCasillasTablero() {
         casillasTablero=new Casilla[8][8];
         rellarTableroConCasillas();
         ubicarFichas();
     }
 
     @Override
-    public int[] getCoordenadasNumericas(String pCoordenadas) {
+    protected int[] getCoordenadasNumericas(String pCoordenadas) {
         return FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.AJEDREZ).convertir(pCoordenadas);
     }
 
@@ -43,12 +43,12 @@ public class TableroAjedrez extends Tablero{
     }
 
     @Override
-    public boolean verificarCoordenadas(String pCoordenadas) {
+    protected boolean verificarCoordenadas(String pCoordenadas) {
         return validarCoordenadas(getCoordenadasNumericas(pCoordenadas));
     }
     
     @Override
-    public boolean validarCoordenadas(int[] pCoordenadas){
+    protected boolean validarCoordenadas(int[] pCoordenadas){
         return pCoordenadas[0]<getCasillasTablero()[0].length
                 && pCoordenadas[1]<getCasillasTablero().length;
     }

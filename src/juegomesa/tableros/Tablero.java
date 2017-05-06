@@ -19,20 +19,20 @@ public abstract class Tablero {
     public Tablero() {
         construirCasillasTablero();
     }
-    public abstract void construirCasillasTablero();
-    public void rellarTableroConCasillas(){
+    protected abstract void construirCasillasTablero();
+    protected void rellarTableroConCasillas(){
         for (int i = 0; i < this.casillasTablero.length; i++) {
             for (int j = 0; j < this.casillasTablero[i].length; j++) {
                 casillasTablero[i][j]=new Casilla();
             }
         }
     }
-    public Casilla[][] getCasillasTablero(){
+    protected Casilla[][] getCasillasTablero(){
         return casillasTablero;
     }
-    public abstract int[] getCoordenadasNumericas(String pCoordenadas);
+    protected abstract int[] getCoordenadasNumericas(String pCoordenadas);
 
-    public boolean estaCasillaVacia(int pCoordenadaX,int pCoordenadaY){
+    protected boolean estaCasillaVacia(int pCoordenadaX,int pCoordenadaY){
         return getCasillasTablero()[pCoordenadaY][pCoordenadaX].casillaVacia();
     }
     public Ficha getFicha(int pCoordenadaX,int pCoordenadaY){
@@ -40,9 +40,9 @@ public abstract class Tablero {
     }
     public abstract boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador);
     
-    public abstract boolean verificarCoordenadas(String pCoordenadas);
+    protected abstract boolean verificarCoordenadas(String pCoordenadas);
     
-    public boolean validarCoordenadas(int[] coordenas) {
+    protected boolean validarCoordenadas(int[] coordenas) {
         return coordenas[0]<getCasillasTablero()[0].length
                 && coordenas[1]<getCasillasTablero().length
                 && coordenas[2]<getCasillasTablero()[0].length

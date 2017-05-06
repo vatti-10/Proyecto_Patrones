@@ -19,7 +19,7 @@ public class TableroDamas extends Tablero{
         super();
     }
     @Override
-    public void construirCasillasTablero() {
+    protected void construirCasillasTablero() {
         casillasTablero=new Casilla[10][10];
         rellarTableroConCasillas();
         ubicarFichas();
@@ -118,11 +118,11 @@ public class TableroDamas extends Tablero{
     }
     
     @Override
-    public boolean verificarCoordenadas(String pCoordenadas) {
+    protected boolean verificarCoordenadas(String pCoordenadas) {
        return validarCoordenadas(getCoordenadasNumericas(pCoordenadas));
     }
     @Override
-    public int[] getCoordenadasNumericas(String pCoordenadas){
+    protected int[] getCoordenadasNumericas(String pCoordenadas){
         ConvertidorInputsDamas convertidorInputsDamas = new ConvertidorInputsDamas();
         return convertidorInputsDamas.convertir(pCoordenadas);
     }
