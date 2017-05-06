@@ -28,7 +28,7 @@ public abstract class Ficha {
         return false;
     }
     
-    public abstract boolean verificarMovimientoValido(int[] pCoordenadas);
+    protected abstract boolean verificarMovimientoValido(int[] pCoordenadas);
     
     protected void actualizarCoordenadas(int[] pCoordenadas){
         setCoordenadaX(pCoordenadas[0]);
