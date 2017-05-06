@@ -6,6 +6,7 @@
 package juegomesa.utils;
 
 import juegomesa.emuns.ETipoJuego;
+import juegomesa.juego.JuegoMesa;
 import juegomesa.utils.tipojuego.ITipoJuego;
 
 /**
@@ -13,7 +14,18 @@ import juegomesa.utils.tipojuego.ITipoJuego;
  * @author hmari_001
  */
 public class FabricaTipoJuego {
-    public static JuegoMesa FabricarTipoJuego(ETipoJuego ){
-        
+    public static JuegoMesa FabricarJuego(ETipoJuego ptipoJuego){
+        switch(ptipoJuego){
+            case AJEDREZ: 
+                return new JuegoAjedrez();
+                
+            case DAMAS:
+                return new JuegoDamas();
+                
+            case GO: 
+                return new JuegoGo();
+                
+            default:
+                return null;
     }
 }
