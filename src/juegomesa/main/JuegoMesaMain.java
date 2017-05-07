@@ -223,7 +223,7 @@ public class JuegoMesaMain {
     }
 
     private static void realizarJugada(String opc) {
-        if(gestora.realizarJugada(opc))
+        if(!gestora.realizarJugada(opc))
             out.println("Movimiento incorrecto");
     }
 
