@@ -21,7 +21,7 @@ public class JuegoDamas extends JuegoMesa{
     }
     
     public void almacenarDatosGeneralesJuego(){
-         Calendar fecha = new GregorianCalendar();
+        Calendar fecha = new GregorianCalendar();
         int anno = fecha.get(Calendar.YEAR);
         int mes = fecha.get(Calendar.MONTH);
         int dia = fecha.get(Calendar.DATE);
