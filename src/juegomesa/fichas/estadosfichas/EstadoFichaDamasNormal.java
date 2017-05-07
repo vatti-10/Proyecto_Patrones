@@ -61,7 +61,6 @@ public class EstadoFichaDamasNormal implements IEstadoFichaDamas{
                 if(ficha.getCoordenadaY() == 9) ficha.setEstado(ficha.getEstadoCorona());
                 break;
         }
-        if(ficha.getEstado() == ficha.getEstadoCorona()) ficha.setTipoFicha(ETipoFicha.DAMAS_CORONA);
     }
     
 }

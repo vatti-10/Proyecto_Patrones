@@ -22,7 +22,7 @@ public class FichaDamas extends Ficha{
     private IEstadoFichaDamas estado;
 
     public FichaDamas(int pCoordX, int pCoordY, EColorJugador pColor) {
-        super(pCoordX, pCoordY, ETipoFicha.DAMAS_NORMAL, pColor);
+        super(pCoordX, pCoordY, ETipoFicha.DAMAS, pColor);
         setEstadoNormal(new EstadoFichaDamasNormal(this));
         setEstadoCorona(new EstadoFichaDamasCorona(this));
         setEstado(getEstadoNormal());
