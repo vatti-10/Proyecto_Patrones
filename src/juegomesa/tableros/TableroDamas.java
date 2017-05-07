@@ -30,7 +30,6 @@ public class TableroDamas extends Tablero{
     public boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador) {
         int [] coordenadas=getCoordenadasNumericas(pCoordenadas);
         if(verificarCoordenadas(pCoordenadas)&&!estaCasillaVacia(coordenadas[0],coordenadas[1])){
-
           return realizarJugada(coordenadas,pCoordenadas);
 
         }else
@@ -112,8 +111,15 @@ public class TableroDamas extends Tablero{
     private boolean moverFicha(int[] coordenadas,String pCoordenadas) {
         boolean resul=false;
         if(estaCasillaVacia(coordenadas[2], coordenadas[3])){
-            if(getFicha(coordenadas[0], coordenadas[1]).moverFicha(coordenadas))
+            if(getFicha(coordenadas[0], coordenadas[1]).moverFicha(coordenadas)){
+                int xi = coordenadas[0];
+                int yi = coordenadas[1];
+                int xf = coordenadas[2];
+                int yf = coordenadas[3];
+                casillasTablero[yf][xf].setFicha(casillasTablero[yi][xi].getFicha());
+                casillasTablero[yi][xi].setFicha(null);
                 resul=true;
+            }
         }
         return resul;
     }
