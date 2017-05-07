@@ -16,13 +16,9 @@ import juegomesa.utils.FabricaConvertidoresInputCoordenada;
  */
 public class FichaGo extends Ficha{
 
-    public FichaGo(int[] pCoordenadas, EColorJugador pColor) {
-        super(pCoordenadas[0], pCoordenadas[1], ETipoFicha.FICHA_GO, pColor);
+    public FichaGo(int pCoordX, int pCoordY, EColorJugador pColor) {
+        super(pCoordX, pCoordY, ETipoFicha.FICHA_GO, pColor);
     }    
-    
-    public FichaGo(String pInput, EColorJugador pColor) {
-        super(FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.GO).convertir(pInput)[0], FabricaConvertidoresInputCoordenada.fabricarConvertidor(ETipoJuego.GO).convertir(pInput)[1], ETipoFicha.FICHA_GO, pColor);
-    }
 
     @Override
     public boolean verificarMovimientoValido(int[] pCoordenadas) {
