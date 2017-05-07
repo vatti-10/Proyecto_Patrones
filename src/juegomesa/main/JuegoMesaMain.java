@@ -185,8 +185,9 @@ public class JuegoMesaMain {
         }
     }
 
-    private static void ejecutarJuego(ETipoJuego eTipoJuego, String jugadore) throws IOException {
+    private static void ejecutarJuego(ETipoJuego eTipoJuego, String jugadores) throws IOException {
         boolean salir=false;
+        gestora.iniciarJuego(jugadores, eTipoJuego);
         do {            
             String opc=mostrarOpcionJugada();
             salir=ejecutarJugada(opc);
