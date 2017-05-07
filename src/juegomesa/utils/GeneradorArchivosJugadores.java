@@ -27,9 +27,9 @@ public class GeneradorArchivosJugadores {
             BufferedWriter bw = null;
             if(!archivo.exists()) {
                 bw = new BufferedWriter(new FileWriter(archivo));
-                bw.write("{username: "+pUsername+", email: "+pEmail+", password: "+pPassword+"}");
-            }
-            bw.close();
+                bw.write("{email: "+pEmail+", password: "+pPassword+"}");
+                bw.close();
+            }            
         }catch (IOException ex) {
         ex.printStackTrace();
         } finally {
