@@ -27,7 +27,7 @@ public abstract class Tablero {
             }
         }
     }
-    protected Casilla[][] getCasillasTablero(){
+    public Casilla[][] getCasillasTablero(){
         return casillasTablero;
     }
     protected abstract int[] getCoordenadasNumericas(String pCoordenadas);
@@ -35,7 +35,7 @@ public abstract class Tablero {
     protected boolean estaCasillaVacia(int pCoordenadaX,int pCoordenadaY){
         return getCasillasTablero()[pCoordenadaY][pCoordenadaX].casillaVacia();
     }
-    public Ficha getFicha(int pCoordenadaX,int pCoordenadaY){
+    protected Ficha getFicha(int pCoordenadaX,int pCoordenadaY){
         return getCasillasTablero()[pCoordenadaY][pCoordenadaX].getFicha();
     }
     public abstract boolean actualizarTablero(String pCoordenadas,EColorJugador pColorJugador);

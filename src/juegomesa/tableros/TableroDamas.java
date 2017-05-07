@@ -111,7 +111,7 @@ public class TableroDamas extends Tablero{
     private boolean moverFicha(int[] coordenadas,String pCoordenadas) {
         boolean resul=false;
         if(estaCasillaVacia(coordenadas[2], coordenadas[3])){
-            if(getFicha(coordenadas[0], coordenadas[1]).moverFicha(pCoordenadas))
+            if(getFicha(coordenadas[0], coordenadas[1]).moverFicha(coordenadas))
                 resul=true;
         }
         return resul;
@@ -135,7 +135,7 @@ public class TableroDamas extends Tablero{
         int ubicacionFichaInicio=0;
         for (int i = 0; i < 4; i++) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
-                getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
+                //getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
             }
             if(ubicacionFichaInicio==1)ubicacionFichaInicio=0;
             else ubicacionFichaInicio=1;
@@ -146,7 +146,7 @@ public class TableroDamas extends Tablero{
         int ubicacionFichaInicio=1;
         for (int i = 9; i > 6; i--) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
-                getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
+                //getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
             }
             if(ubicacionFichaInicio==1)ubicacionFichaInicio=0;
             else ubicacionFichaInicio=1;

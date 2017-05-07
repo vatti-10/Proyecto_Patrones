@@ -15,8 +15,8 @@ import juegomesa.emuns.ETipoJuego;
  * @author hmari_001
  */
 public class JuegoDamas extends JuegoMesa{
-    public JuegoDamas(Jugador pjugador1, Jugador pjugador2, ETipoJuego ptipoJuego){
-        super(pjugador1, pjugador2, ptipoJuego);
+    public JuegoDamas(Jugador pjugador1, Jugador pjugador2){
+        super(pjugador1, pjugador2, ETipoJuego.DAMAS);
         almacenarDatosGeneralesJuego();
     }
     

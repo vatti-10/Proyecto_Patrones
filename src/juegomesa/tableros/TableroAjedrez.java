@@ -9,6 +9,12 @@ import juegomesa.emuns.EColorJugador;
 import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
 import juegomesa.fichas.Ficha;
+import juegomesa.fichas.FichaAjedrezArfil;
+import juegomesa.fichas.FichaAjedrezCaballo;
+import juegomesa.fichas.FichaAjedrezPeon;
+import juegomesa.fichas.FichaAjedrezReina;
+import juegomesa.fichas.FichaAjedrezRey;
+import juegomesa.fichas.FichaAjedrezTorre;
 import juegomesa.utils.FabricaConvertidoresInputCoordenada;
 
 /**
@@ -58,32 +64,33 @@ public class TableroAjedrez extends Tablero{
         ubicarFichasNegras();
     }
 
-    private void ubicarFichasBlancas() {
-        getCasillasTablero()[0][0].setFicha(new Ficha(0, 0, ETipoFicha.TORRE, EColorJugador.BLANCO));
-        getCasillasTablero()[0][7].setFicha(new Ficha(0, 0, ETipoFicha.TORRE, EColorJugador.BLANCO));
-        getCasillasTablero()[0][1].setFicha(new Ficha(0, 0, ETipoFicha.CABALLO, EColorJugador.BLANCO));
-        getCasillasTablero()[0][6].setFicha(new Ficha(0, 0, ETipoFicha.CABALLO, EColorJugador.BLANCO));
-        getCasillasTablero()[0][2].setFicha(new Ficha(0, 0, ETipoFicha.ARFIL, EColorJugador.BLANCO));
-        getCasillasTablero()[0][5].setFicha(new Ficha(0, 0, ETipoFicha.ARFIL, EColorJugador.BLANCO));
-        getCasillasTablero()[0][3].setFicha(new Ficha(0, 0, ETipoFicha.REINA, EColorJugador.BLANCO));
-        getCasillasTablero()[0][4].setFicha(new Ficha(0, 0, ETipoFicha.REY, EColorJugador.BLANCO));
-        ubicarPeones(1);
+    private void ubicarFichasNegras() {
+        getCasillasTablero()[0][0].setFicha(new FichaAjedrezTorre(0, 0, EColorJugador.NEGRO));
+        getCasillasTablero()[0][7].setFicha(new FichaAjedrezTorre(0, 0, EColorJugador.NEGRO));
+        getCasillasTablero()[0][1].setFicha(new FichaAjedrezCaballo(0, 1,EColorJugador.NEGRO));
+        getCasillasTablero()[0][6].setFicha(new FichaAjedrezCaballo(0, 1,EColorJugador.NEGRO));
+        getCasillasTablero()[0][2].setFicha(new FichaAjedrezArfil(0, 2, EColorJugador.NEGRO));
+        getCasillasTablero()[0][5].setFicha(new FichaAjedrezArfil(0, 2, EColorJugador.NEGRO));
+        getCasillasTablero()[0][3].setFicha(new FichaAjedrezReina(0, 3, EColorJugador.NEGRO));
+        getCasillasTablero()[0][4].setFicha(new FichaAjedrezRey(0, 4, EColorJugador.NEGRO));
+        ubicarPeones(1,EColorJugador.NEGRO);
     }
 
-    private void ubicarFichasNegras() {
-        getCasillasTablero()[0][0].setFicha(new Ficha(0, 0, ETipoFicha.TORRE, EColorJugador.BLANCO));
-        getCasillasTablero()[0][7].setFicha(new Ficha(0, 0, ETipoFicha.TORRE, EColorJugador.BLANCO));
-        getCasillasTablero()[0][1].setFicha(new Ficha(0, 0, ETipoFicha.CABALLO, EColorJugador.BLANCO));
-        getCasillasTablero()[0][6].setFicha(new Ficha(0, 0, ETipoFicha.CABALLO, EColorJugador.BLANCO));
-        getCasillasTablero()[0][2].setFicha(new Ficha(0, 0, ETipoFicha.ARFIL, EColorJugador.BLANCO));
-        getCasillasTablero()[0][5].setFicha(new Ficha(0, 0, ETipoFicha.ARFIL, EColorJugador.BLANCO));
-        getCasillasTablero()[0][3].setFicha(new Ficha(0, 0, ETipoFicha.REINA, EColorJugador.BLANCO));
-        getCasillasTablero()[0][4].setFicha(new Ficha(0, 0, ETipoFicha.REY, EColorJugador.BLANCO));
-        ubicarPeones(6);
+    private void ubicarFichasBlancas() {
+        
+        getCasillasTablero()[7][0].setFicha(new FichaAjedrezTorre(0, 0, EColorJugador.BLANCO));
+        getCasillasTablero()[7][7].setFicha(new FichaAjedrezTorre(0, 7, EColorJugador.BLANCO));
+        getCasillasTablero()[7][1].setFicha(new FichaAjedrezCaballo(0, 1,EColorJugador.BLANCO));
+        getCasillasTablero()[7][6].setFicha(new FichaAjedrezCaballo(0, 6,EColorJugador.BLANCO));
+        getCasillasTablero()[7][2].setFicha(new FichaAjedrezArfil(0, 2,EColorJugador.BLANCO));
+        getCasillasTablero()[7][5].setFicha(new FichaAjedrezArfil(0, 5,EColorJugador.BLANCO));
+        getCasillasTablero()[7][3].setFicha(new FichaAjedrezReina(0, 3,EColorJugador.BLANCO));
+        getCasillasTablero()[7][4].setFicha(new FichaAjedrezRey(0, 4,EColorJugador.BLANCO));
+        ubicarPeones(6,EColorJugador.BLANCO);
     }
-    private void ubicarPeones(int pFila){
+    private void ubicarPeones(int pFila,EColorJugador pColor){
         for (int i = 0; i < getCasillasTablero().length; i++) {
-            getCasillasTablero()[pFila][i].setFicha(new Ficha(0, 0, ETipoFicha.PEON, EColorJugador.BLANCO));
+            getCasillasTablero()[pFila][i].setFicha(new FichaAjedrezPeon(i, pFila, pColor));
         }
     }
 
