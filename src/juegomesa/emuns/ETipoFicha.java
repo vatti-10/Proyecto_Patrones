@@ -11,7 +11,7 @@ package juegomesa.emuns;
  */
 public enum ETipoFicha {
     FICHA_GO,
-    DAMAS,
+    FICHA_DAMAS,
     PEON,
     CABALLO,
     TORRE,
