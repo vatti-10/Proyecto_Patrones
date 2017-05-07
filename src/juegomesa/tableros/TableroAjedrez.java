@@ -78,14 +78,14 @@ public class TableroAjedrez extends Tablero{
 
     private void ubicarFichasBlancas() {
         
-        getCasillasTablero()[7][0].setFicha(new FichaAjedrezTorre(0, 0, EColorJugador.BLANCO));
-        getCasillasTablero()[7][7].setFicha(new FichaAjedrezTorre(0, 7, EColorJugador.BLANCO));
-        getCasillasTablero()[7][1].setFicha(new FichaAjedrezCaballo(0, 1,EColorJugador.BLANCO));
-        getCasillasTablero()[7][6].setFicha(new FichaAjedrezCaballo(0, 6,EColorJugador.BLANCO));
-        getCasillasTablero()[7][2].setFicha(new FichaAjedrezArfil(0, 2,EColorJugador.BLANCO));
-        getCasillasTablero()[7][5].setFicha(new FichaAjedrezArfil(0, 5,EColorJugador.BLANCO));
-        getCasillasTablero()[7][3].setFicha(new FichaAjedrezReina(0, 3,EColorJugador.BLANCO));
-        getCasillasTablero()[7][4].setFicha(new FichaAjedrezRey(0, 4,EColorJugador.BLANCO));
+        getCasillasTablero()[7][0].setFicha(new FichaAjedrezTorre(7, 0, EColorJugador.BLANCO));
+        getCasillasTablero()[7][7].setFicha(new FichaAjedrezTorre(7, 7, EColorJugador.BLANCO));
+        getCasillasTablero()[7][1].setFicha(new FichaAjedrezCaballo(7, 1,EColorJugador.BLANCO));
+        getCasillasTablero()[7][6].setFicha(new FichaAjedrezCaballo(7, 6,EColorJugador.BLANCO));
+        getCasillasTablero()[7][2].setFicha(new FichaAjedrezArfil(7, 2,EColorJugador.BLANCO));
+        getCasillasTablero()[7][5].setFicha(new FichaAjedrezArfil(7, 5,EColorJugador.BLANCO));
+        getCasillasTablero()[7][3].setFicha(new FichaAjedrezReina(7, 3,EColorJugador.BLANCO));
+        getCasillasTablero()[7][4].setFicha(new FichaAjedrezRey(7, 4,EColorJugador.BLANCO));
         ubicarPeones(6,EColorJugador.BLANCO);
     }
     private void ubicarPeones(int pFila,EColorJugador pColor){
