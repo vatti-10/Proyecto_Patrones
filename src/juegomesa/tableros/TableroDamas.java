@@ -8,6 +8,7 @@ package juegomesa.tableros;
 import juegomesa.emuns.EColorJugador;
 import juegomesa.emuns.ETipoFicha;
 import juegomesa.fichas.Ficha;
+import juegomesa.utils.FabricaFichas;
 import juegomesa.utils.convertidores.ConvertidorInputsDamas;
 
 /**
@@ -131,22 +132,22 @@ public class TableroDamas extends Tablero{
         ubicarFichasNegras();
     }
 
-    private void ubicarFichasBlancas() {
-        int ubicacionFichaInicio=0;
+    private void ubicarFichasNegras() {
+        int ubicacionFichaInicio=1;
         for (int i = 0; i < 4; i++) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
-                //getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
+                getCasillasTablero()[i][j].setFicha(FabricaFichas.crearFicha(ETipoFicha.FICHA_DAMAS, j, i, EColorJugador.NEGRO));
             }
             if(ubicacionFichaInicio==1)ubicacionFichaInicio=0;
             else ubicacionFichaInicio=1;
         }
     }
 
-    private void ubicarFichasNegras() {
-        int ubicacionFichaInicio=1;
-        for (int i = 9; i > 6; i--) {
+    private void ubicarFichasBlancas() {
+        int ubicacionFichaInicio=0;
+        for (int i = 9; i > 5; i--) {
             for (int j = ubicacionFichaInicio; j < getCasillasTablero()[i].length; j+=2) {
-                //getCasillasTablero()[i][j].setFicha(new Ficha(i, j, ETipoFicha.DAMAS_NORMAL, EColorJugador.BLANCO));
+                getCasillasTablero()[i][j].setFicha(FabricaFichas.crearFicha(ETipoFicha.FICHA_DAMAS, j, i, EColorJugador.BLANCO));
             }
             if(ubicacionFichaInicio==1)ubicacionFichaInicio=0;
             else ubicacionFichaInicio=1;
