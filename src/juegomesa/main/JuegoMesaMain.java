@@ -38,10 +38,10 @@ public class JuegoMesaMain {
     }
 
     private static void mostrarMenu() {
-        out.println("====Menu principal====");
-        out.println("1-Crear cuenta");
-        out.println("2-Ingresar");
-        out.println("3-Salir");
+        out.println("==== Menu principal ====");
+        out.println("1- Crear cuenta");
+        out.println("2- Ingresar");
+        out.println("3- Salir");
     }
 
     private static char leerOpcion() throws IOException {
@@ -59,6 +59,9 @@ public class JuegoMesaMain {
                return false;
             case '3':
                return true;
+            case '4':
+                crearJugadoresDefault();
+                return false;
             default:
                 out.println("Por favor ingrese una opcion valida");
                 return false;
@@ -70,14 +73,14 @@ public class JuegoMesaMain {
         String username= in.readLine();
         out.println("Email: ");
         String email= in.readLine();
-        out.println("Password: ");
+        out.println("Password: (debe tener al menos 6 digitos)");
         String password= in.readLine();
         out.println("Seleccione su color (1-Negro,2-Blanco): ");
         char color= in.readLine().charAt(0);
         if(gestora.registrarJugador(username, email, password, getColor(color))){
-            out.println("Jugador registrado con exito!!");
+            out.println("Jugador registrado con exito!!\n");
         }else
-            out.println("Nombre de usuario ya registrado");
+            out.println("Nombre de usuario ya registrado y/o contraseña inválida\n");
 
 }
 
@@ -112,9 +115,10 @@ public class JuegoMesaMain {
     }
 
     private static void mostrarMenuJuego() {
-        out.println("================");
-        out.println("1-Jugar");
-        out.println("2-Salir");
+        out.println("=== Bienvenido ===");
+        out.println("Elija una opción: ");
+        out.println("1- Jugar");
+        out.println("2- Salir");
     }
 
     private static boolean ejecutarMenuJuego(char opc) throws IOException {
@@ -137,11 +141,11 @@ public class JuegoMesaMain {
     }
 
     private static void mostrarOpcionesDeJuegos() {
-        out.println("===Seleccione un juego de estrategia===");
-        out.println("1-Damas");
-        out.println("2-Ajedrez");
-        out.println("3-Go");
-        out.println("4-Salir");
+        out.println("=== Seleccione un juego de estrategia ===");
+        out.println("1- Damas");
+        out.println("2- Ajedrez");
+        out.println("3- Go");
+        out.println("4- Salir");
     }
 
     private static void ejecutarOpcionJuego(char opc) throws IOException {
@@ -195,7 +199,9 @@ public class JuegoMesaMain {
     }
 
     private static String mostrarOpcionJugada() throws IOException {
-        out.println("Por favor ingrese su jugada"+"\n Digite 0 para salir o -1 para mostrar el tablero");
+        out.println();
+        out.println("Turno de "+gestora.getJuegoActual().getJugadorActual().getUsername());
+        out.println("Por favor ingrese su jugada"+"\n  Digite 0 para salir o -1 para mostrar el tablero");
         return in.readLine();
     }
 
@@ -204,6 +210,11 @@ public class JuegoMesaMain {
            mostrarTablero();
            return false;
        }else if(opc.equals("0")){
+           out.println();
+           out.println("Ha finalizado el juego");
+           out.println("El registro de jugadas es el siguiente: ");
+           out.println(gestora.getJuegoActual().getRegistrosJugadas().toString());
+           out.println();
            return true;
        }else {
             realizarJugada(opc);
@@ -218,5 +229,10 @@ public class JuegoMesaMain {
 
     private static void mostrarTablero() {
         out.println(gestora.mostrarTablero());
+    }
+
+    private static void crearJugadoresDefault() {
+        gestora.registrarJugador("jorge", "jorge@gmail.com", "123456", EColorJugador.BLANCO);
+        gestora.registrarJugador("carlos", "carlos@gmail.com", "123456", EColorJugador.NEGRO);
     }
 }

@@ -6,6 +6,7 @@
 package juegomesa.main;
 import java.util.ArrayList;
 import juegomesa.emuns.EColorJugador;
+import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
 import juegomesa.juego.Jugador;
 import juegomesa.juego.JuegoMesa;
@@ -25,7 +26,7 @@ public class Gestora {
     }
     
     public boolean registrarJugador(String pUsername,String pEmail,String pPassword,EColorJugador pColorJugador){
-        if(!existeUsuario(pUsername)){
+        if(!existeUsuario(pUsername) && contraseñaValida(pPassword)){
             jugadoresRegistrados.add(new Jugador(pUsername, pEmail, pPassword, pColorJugador));
             GeneradorArchivosJugadores.generarArchivoJugador(pUsername, pEmail, pPassword);
             return true;
@@ -100,102 +101,50 @@ public class Gestora {
     public String mostrarTablero(){
         Casilla[][] tablero=juegoActual.getTablero().getCasillasTablero();
         String tableroString="";
-        switch(juegoActual.getTipoJuego()){
-            case AJEDREZ:
-                tableroString=getTableroAjedrez(tablero);
-                break;
-            case DAMAS:
-                tableroString=getTableroDamas(tablero);
-                break;
-            case GO:
-                tableroString=getTableroGo(tablero);
-                break;
+        for (int i = 0; i < tablero.length; i++) {
+            for (int j = 0; j < tablero[i].length; j++) {
+                tableroString += "|";
+                if(tablero[i][j].casillaVacia()){
+                    tableroString += "__";
+                }else{
+                    tableroString += stringLetraInicial(tablero[i][j].getFicha().getTipoFicha());
+                    tableroString += stringColor(tablero[i][j].getFicha().getColor());
+                }                
+            }
+            tableroString += "|\n";           
         }
+        
         return tableroString;
     }
-
-    private String getTableroAjedrez(Casilla[][] tablero) {
-        String resul="";
-        for (int i = 0; i < tablero.length; i++) {
-            resul+="|";
-            for (int j = 0; j < tablero[i].length; j++) {
-                if(!tablero[i][j].casillaVacia()&& j==tablero[i].length-1){
-                    resul+=" "+getTipoFicha(i, j, tablero)+" |\n";
-                }else if(!tablero[i][j].casillaVacia()){
-                    resul+=" "+getTipoFicha(i, j, tablero)+" |";
-                }else if(tablero[i][j].casillaVacia() && j==tablero[i].length-1){
-                    resul+=" _  |\n";
-                }else {
-                    resul+=" _  |";
-                }
-            }
+    
+    private String stringLetraInicial(ETipoFicha pTipo){
+        switch(pTipo){
+            case ARFIL: return "B";
+            case CABALLO: return "N";
+            case PEON: return "P";
+            case REINA: return "Q";
+            case REY: return "K";
+            case TORRE: return "R";
+            case FICHA_DAMAS:
+            case FICHA_GO: return " ";
+            default: return "";
         }
-         return resul;
     }
-
-    private String getTableroDamas(Casilla[][] tablero) {
-        String resul="";
-        for (int i = 0; i < tablero.length; i++) {
-            resul+="|";
-            for (int j = 0; j < tablero[i].length; j++) {
-                if(!tablero[i][j].casillaVacia()&& j==tablero[i].length-1){
-                    resul+=" "+getColorFicha(i, j, tablero)+" |\n";
-                }else if(!tablero[i][j].casillaVacia()&& j==tablero[i].length-1){
-                    resul+=" "+getColorFicha(i, j, tablero)+" |\n";
-                }else if(tablero[i][j].casillaVacia() && j==tablero[i].length-1){
-                    resul+=" _  |\n";
-                }else {
-                    resul+=" _  |";
-                }
-            }
+    
+    private String stringColor(EColorJugador pColor){
+        switch(pColor){
+            case BLANCO: return "W";
+            case NEGRO: return "B";
+            default: return ""; 
         }
-         return resul;
     }
-
-    private String getTableroGo(Casilla[][] tablero) {
-         String resul="";
-        for (int i = 0; i < tablero.length; i++) {
-            resul+="|";
-            for (int j = 0; j < tablero[i].length; j++) {
-                if(!tablero[i][j].casillaVacia()&& j==tablero[i].length-1){
-                    resul+=" "+getColorFicha(i, j, tablero)+" |\n";
-                }else if(!tablero[i][j].casillaVacia()&& j==tablero[i].length-1){
-                    resul+=" "+getColorFicha(i, j, tablero)+" |\n";
-                }else if(tablero[i][j].casillaVacia() && j==tablero[i].length-1){
-                    resul+=" _  |\n";
-                }else {
-                    resul+=" _  |";
-                }
-            }
-        }
-         return resul;
+    
+    private boolean contraseñaValida(String pPassword) {
+        if(pPassword.length() > 5) return true;
+        return false;
     }
-    private char getTipoFicha(int i,int j,Casilla[][] tablero){
-        char ficha = 0;
-        switch(tablero[i][j].getFicha().getTipoFicha()){
-            case ARFIL:
-                ficha= 'B';
-            case CABALLO:
-                ficha= 'N';
-            case TORRE:
-                ficha= 'R';
-            case REY:
-                ficha= 'K';
-            case REINA:
-                ficha= 'Q';
-            case PEON:
-                ficha= 'P';
-        }
-        return ficha;
-    }
-    private char getColorFicha(int i,int j,Casilla[][] tablero){
-        char ficha = 0;
-        switch(tablero[i][j].getFicha().getColor()){
-            case BLANCO:
-                ficha= 'W';
-            case NEGRO:
-                ficha= 'B';
-        }
-        return ficha;
+    
+    public JuegoMesa getJuegoActual(){
+        return juegoActual;
     }
 }
