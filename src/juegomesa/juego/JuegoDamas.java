@@ -42,7 +42,7 @@ public class JuegoDamas extends JuegoMesa{
     public void almacenarJugada(String pjugada){
         if(jugadorActual.getEColorJugador() == EColorJugador.BLANCO){
             registrosJugadas.append(contadorTurnos);
-            registrosJugadas.append(" ");
+            registrosJugadas.append(". ");
             registrosJugadas.append(pjugada);
             registrosJugadas.append(" ");
         }else{

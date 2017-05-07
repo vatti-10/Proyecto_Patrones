@@ -29,7 +29,7 @@ public abstract class JuegoMesa {
         setTipoJuego(ptipoJuego);
         setJugadorActual(null);
         setContadorTurnos(1);
-        setRegistrosJugadas(null);
+        setRegistrosJugadas(new StringBuilder());
         iniciarJuego(ptipoJuego);
     }
     
