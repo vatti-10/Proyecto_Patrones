@@ -6,9 +6,11 @@
 package juegomesa.tableros;
 
 import juegomesa.emuns.EColorJugador;
+import juegomesa.emuns.ETipoFicha;
 import juegomesa.emuns.ETipoJuego;
 import juegomesa.fichas.FichaGo;
 import juegomesa.utils.FabricaConvertidoresInputCoordenada;
+import juegomesa.utils.FabricaFichas;
 
 /**
  *
@@ -39,9 +41,9 @@ public class TableroGo extends Tablero{
     
     private void ubicarFicha(int[] coordenadas,char pJugador) {
         if(pJugador=='B'){
-            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new FichaGo(coordenadas, EColorJugador.BLANCO));
+            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(FabricaFichas.crearFicha(ETipoFicha.FICHA_GO, coordenadas[0], coordenadas[1], EColorJugador.NEGRO));
         }else{
-            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(new FichaGo(coordenadas, EColorJugador.NEGRO));
+            getCasillasTablero()[coordenadas[1]][coordenadas[0]].setFicha(FabricaFichas.crearFicha(ETipoFicha.FICHA_GO, coordenadas[0], coordenadas[1], EColorJugador.BLANCO));
         }
     }
     
