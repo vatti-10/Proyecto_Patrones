@@ -17,6 +17,7 @@ public class JuegoGo extends JuegoMesa{
     
     public JuegoGo(Jugador pjugador1, Jugador pjugador2, ETipoJuego ptipoJuego){
        super(pjugador1, pjugador2, ptipoJuego);
+       almacenarDatosGeneralesJuego();
     }
     
     public void almacenarDatosGeneralesJuego(){
